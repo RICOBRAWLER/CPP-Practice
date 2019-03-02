@@ -1,20 +1,22 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include <iostream>
+using namespace std;
 
-typedef union Data {
-    short num1;
-    int num2;
-}Data;
 
-int main()
+int d[91];
+
+
+int main(void)
 {
-    Data *d1 = (Data*)malloc(sizeof(Data));
+	int n;
+	cin>>n;
 
-    d1->num2 = 1;
+	d[1] = 1;
+	d[2] = 1;
 
-    printf("%d %d\n", d1->num1, d1->num2);
+	for(int i=3; i<=n; i++)
+	{
+		d[i] = d[i-1] + d[i-2];
+	}
 
-    free(d1);
-
-    return 0;
+	cout<<d[n];
 }
