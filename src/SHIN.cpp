@@ -3,7 +3,7 @@ using namespace std;
 
 
 int a[10001];
-int d[10001];
+int d[10001][2];
 
 
 int main(void)
@@ -16,17 +16,14 @@ int main(void)
 		cin>>a[i];
 	}
 
-	d[1] = a[1];
-	d[2] = a[1] + a[2];
-
-	for(int i=3; i<=n; i++)
+	for(int i=1; i<=n; i++)
 	{
-		d[i] = d[i-1];
-
-		d[i] = max(d[i], d[i-2] + a[i]);
-
-		d[i] = max(d[i], d[i-3] + a[i-1] + a[i]);
+		d[i][0] = max(d[i-1][0], max(d[i-1][1], d[i-1][2]));
+		d[i][1] = d[i-1][0] + a[i];
+		d[i][2] = d[i-1][1] + a[i];
 	}
 
-	cout<<d[n];
+	int ans = max(d[n][0], max(d[n][1], d[n][2]));
+
+	cout<<ans;
 }
