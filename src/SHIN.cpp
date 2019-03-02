@@ -33,6 +33,15 @@ int main(void)
 			d[i][2] = max(d[i-1][0], d[i-1][1]) + a[i][2];
 		}
 
+		int ans = d[0][0];
+		for(int i=1; i<=n; i++)
+		{
+			for(int j=0; i<3; j++)
+			{
+				ans = max(ans, d[i][j]);
+			}
+		}
 
+		cout<< ans;
 	}
 }
