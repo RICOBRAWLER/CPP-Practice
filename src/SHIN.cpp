@@ -1,8 +1,10 @@
 #include <iostream>
 using namespace std;
 
+
 int a[1000];
-int d[1000];
+int d1[1000];
+int d2[1000];
 
 
 int main()
@@ -17,23 +19,32 @@ int main()
 
 	for(int i=1; i<=n; i++)
 	{
-		d[i] = a[i];
+		d1[i] = 1;
 
-		for(int j=1; j<=i; j++)
+		for(int j=1; j<i; j++)
 		{
-			if(a[i]>a[j] && d[j]+a[i]>d[i])
-			{
-				d[i] = d[j]+a[i];
-			}
+			if(a[i]>a[j] && d1[j]+1>d1[i])
+				d1[i] = d1[j]+1;
 		}
 	}
 
-	int ans = d[1];
+	for(int i=n; i>=1; i--)
+	{
+		d2[i] = 1;
+
+		for(int j=i+1; j<=n; j++)
+		{
+			if(a[i]>a[j] && d2[j]+1>d2[i])
+				d2[i] = d2[j]+1;
+		}
+	}
+
+	int ans = 0;
 
 	for(int i=1; i<=n; i++)
 	{
-		ans = max(ans, d[i]);
+		ans = max(ans, d1[i]+d2[i]-1);
 	}
 
-	cout<<ans<<"\n";
+	cout<<ans;
 }
